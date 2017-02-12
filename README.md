@@ -1,7 +1,7 @@
 # FEND Feed Reader Testing Project using Jasmine
 
 * I have added jasmine-jquery.js inside the jasmine-2.1.2 folder.
-* To check if the testing is working, open [index.html](http://sunyoungsh.github.io/FEND-testing-jasmine).
+* To check if the testing is working, you need to download or clone the whole repository and open index.html from your local.
 
 
 ----------------
