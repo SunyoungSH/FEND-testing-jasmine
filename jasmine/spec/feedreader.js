@@ -42,7 +42,10 @@ $(function() {
         //tests if the menu element is hidden when the menu icon is clicked
         it('changes visibility when icon is clicked', function() {
             $('.menu-icon-link').trigger('click');
-            expect($('body')).toHaveClass('');
+            expect($('body')).not.toHaveClass('menu-hidden');
+            $('.menu-icon-link').trigger('click');
+            expect($('body')).toHaveClass('menu-hidden');
+
 
         });
     });
@@ -50,29 +53,29 @@ $(function() {
     describe('Initial Entries', function() {
         //tests if loadFeed() works and if .entry element exists in the .feed container.
         beforeEach(function(done) {
-            loadFeed(0, function() {
-                done();
-            });
+            loadFeed(0, done);
         });
-        it('are not empty', function(done) {
-            expect($('.feed').find('.entry').length).not.toBe(0);
-            done();
+
+        it('are not empty', function() {
+            expect($('.feed .entry').length).not.toBe(0);
         });
     });
 
     describe('New Feed Selection', function() {
         //tests if the feed that is newly loaded by loadFeed() is different from previous feed
-        var oldfeed = $('.feed');
-
+        var oldfeed, newfeed;
         beforeEach(function(done) {
             loadFeed(0, function() {
-                done();
+                oldfeed = $('.feed').find('h2').text();
+                loadFeed(1, function() {
+                    newfeed = $('.feed').find('h2').text()
+                    done();
+                })
             });
-        });
-        it('is loaded', function(done) {
-            var newfeed = $('.feed');
-            expect(oldfeed).not.toBe(newfeed);
-            done();
+        })
+
+        it('is loaded', function() {
+            expect(oldfeed).not.toEqual(newfeed);
         });
     });
 }());
